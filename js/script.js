@@ -59,9 +59,16 @@ var quotes = [
 
 
 //getRandomQuote function (generate random number and get index of quotes based on it)
+var currentNumber; //make sure you don't get the same quote twice in a row
 
 function getRandomQuote() {
   var randomNumber = Math.floor(Math.random() * quotes.length) + 1;
+  if (randomNumber === currentNumber){
+    randomNumber += 1;
+    currentNumber = randomNumber;
+  } else {
+    currentNumber = randomNumber;
+  }
   var randomQuote = quotes[randomNumber-1]; // -1 to get index of 0
   return randomQuote;
 }
@@ -79,7 +86,6 @@ function printQuote() {
   if (currentQuote.year) {
     textToPrint += '<span class="year"> ${currentQuote.year} </span> </p>'
   }
-
 
 
   var textToPrint = `<p class="quote">  ${currentQuote.quote}</p>
